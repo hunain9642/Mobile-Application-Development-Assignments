@@ -1,0 +1,56 @@
+class User {
+  String name;
+  int age;
+  String contact;
+
+  User({
+    required this.name,
+    required this.age,
+    required this.contact,
+  });
+
+  Map<String, dynamic> printData() {
+    final data = {
+      "user_name": name,
+      "user_age": age,
+      "user_contact": contact,
+    };
+    print(data);
+    return data;
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "user_name": name,
+      "user_age": age,
+      "user_phone": contact,
+    };
+  }
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      name: json["user_name"] as String,
+      age: json["user_age"] as int,
+      contact: json["user_phone"].toString(),
+    );
+  }
+}
+
+void main() {
+  User user = User(
+    name: "Hunain",
+    age: 21,
+    contact: "123456",
+  );
+
+  print("Original Data:");
+  user.printData();
+
+  Map<String, dynamic> jsonData = user.toJson();
+  print("\nSerialized JSON:");
+  print(jsonData);
+
+  User newUser = User.fromJson(jsonData);
+  print("\nDeserialized Data:");
+  newUser.printData();
+}
